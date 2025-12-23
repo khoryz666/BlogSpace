@@ -94,3 +94,11 @@ BlogSpace/
 - [ ] Add multiple languages (en, zh, fr) on both backend and frontend.
 - [ ] Move backend to Raspberry Pi.
 - [ ] Configure Vercel to host `frontend/`.
+
+After that:
+
+When you’re back, we can:
+Connect frontend to /api/health in main.js so you see real data from Go.
+Start implementing Markdown reading and a real /api/posts endpoint.
+Plan how to move the backend to your Raspberry Pi.
+For now, if you follow the steps above, you’ll have a clean, well‑commented skeleton safely stored in GitHub.
