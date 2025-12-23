@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>BlogSpace - Home</title>
+
+  <!-- Basic viewport for mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Link to main stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!--
+    Simple header.
+    Later you can add logo, navigation links, etc.
+  -->
+  <header class="site-header">
+    <h1 class="site-title">BlogSpace</h1>
+    <nav class="lang-switcher">
+      <!--
+        Language buttons.
+        JavaScript will listen to these and reload the list of posts.
+      -->
+      <button data-lang="en">EN</button>
+      <button data-lang="zh">中文</button>
+      <button data-lang="fr">FR</button>
+    </nav>
+  </header>
+
+  <!--
+    Main content area for the list of posts.
+    JavaScript will insert cards into this container.
+  -->
+  <main class="content">
+    <section id="post-list">
+      <p>Loading posts... (for now this is static text)</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> BlogSpace. Built with HTML, CSS, JS & Go.</p>
+  </footer>
+
+  <!--
+    Main JavaScript file.
+    It will:
+    - Set current year in footer.
+    - Handle language switching.
+    - (Later) Fetch data from backend.
+  -->
+  <script src="main.js"></script>
+</body>
+</html>
+argin-bottom: 0.75rem;
+}
+
+#post-container p {
+  margin-bottom: 0.75rem;
+}

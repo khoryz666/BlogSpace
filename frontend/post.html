@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>BlogSpace - Post</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1 class="site-title">BlogSpace</h1>
+    <nav class="lang-switcher">
+      <!--
+        Same language buttons as index.html.
+        In the future, these should keep the same slug but change the language.
+      -->
+      <button data-lang="en">EN</button>
+      <button data-lang="zh">中文</button>
+      <button data-lang="fr">FR</button>
+    </nav>
+  </header>
+
+  <main class="content">
+    <!--
+      Container for the post content.
+      JavaScript will:
+      - Read ?lang=...&slug=...
+      - Fetch single post data from backend.
+      - Inject HTML into this element.
+    -->
+    <article id="post-container">
+      <h2>Post title will appear here</h2>
+      <p>This is just placeholder text until we connect to the backend.</p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> BlogSpace.</p>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>utes.
+ */
+function setupLanguageButtons() {
+  const buttons = document.querySelectorAll(".lang-switcher button");
+  const currentLang = getCurrentLanguage();
+
+  buttons.forEach((btn) => {
+    const btnLang = btn.getAttribute("data-lang");
+
+    // Highlight the currently selected language (simple style change).
+    if (btnLang === currentLang) {
+      btn.style.backgroundColor = "#4b5563"; // darker gray
+    }
+
+    btn.addEventListener("click", () => {
+      switchLanguage(btnLang);
+    });
+  });
+}
+
+// ---- Page-specific logic ----
+
+/**
+ * Logic for the index (home) page:
+ * - In the future: fetch list of posts from backend.
+ * - For now: show a placeholder post card.
+ */
+function initIndexPage() {
+  const postList = document.getElementById("post-list");
+  if (!postList) return; // If this element doesn't exist, we are not on index.html
+
+  const lang = getCurrentLanguage();
+
+  // Placeholder content for now.
+  // Later, we'll replace this with data from Go backend using fetch().
+  postList.innerHTML = `
+    <div class="post-card">
+      <h2>Sample post (static for now)</h2>
+      <p>This is a placeholder. Later, this list will come from the Go backend for lang = <strong>${lang}</strong>.</p>
+      <a href="post.html?lang=${lang}&slug=hello-world">Read more</a>
+    </div>
+  `;
+}
+
+/**
+ * Logic for the post page:
+ * - In the future: fetch a single post from backend.
+ * - For now: show a placeholder based on slug and lang.
+ */
+function initPostPage() {
+  const postContainer = document.getElementById("post-container");
+  if (!postContainer) return; // If this element doesn't exist, we are not on post.html
+
+  const params = new URLSearchParams(window.location.search);
+  const lang = params.get("lang") || "en";
+  const slug = params.get("slug") || "hello-world";
+
+  // Placeholder content.
+  // Later, we will call the backend: /api/posts/{lang}/{slug}
+  postContainer.innerHTML = `
+    <h2>Post: ${slug}</h2>
+    <p>Language: <strong>${lang}</strong></p>
+    <p>This is placeholder content for the post page. Eventually this HTML will be loaded from the Go backend.</p>
+  `;
+}
+
+// ---- Entry point ----
+
+document.addEventListener("DOMContentLoaded", () => {
+  setCurrentYear();
+  setupLanguageButtons();
+  initIndexPage();
+  initPostPage();
+});
